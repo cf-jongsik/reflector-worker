@@ -1,15 +1,22 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { Hono } from 'hono';
 
-export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
-	},
-};
+const app = new Hono();
+
+app.get('/', async (c) => {
+	console.log(c.req.header());
+	return c.json({ header: c.req.header(), body: c.req.body });
+});
+
+app.post('/', async (c) => {
+	console.log(c.req.header());
+	console.log(await c.req.json());
+	return c.json({ header: c.req.header(), body: await c.req.json() });
+});
+
+app.put('/', async (c) => {
+	console.log(c.req.header());
+	console.log(await c.req.json());
+	return c.json({ header: c.req.header(), body: await c.req.json() });
+});
+
+export default app;
