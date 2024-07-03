@@ -7,6 +7,11 @@ app.get('/', async (c) => {
 	return c.json({ header: c.req.header(), body: c.req.body });
 });
 
+app.get('/*', async (c) => {
+	console.log(c.req.header());
+	return c.json({ header: c.req.header(), body: c.req.body });
+});
+
 app.post('/', async (c) => {
 	console.log(c.req.header());
 	console.log(await c.req.json());
