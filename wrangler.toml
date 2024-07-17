@@ -1,6 +1,6 @@
 name = "reflector-worker"
 main = "src/index.js"
-compatibility_date = "2024-07-01"
+compatibility_date = "2024-07-17"
 workers_dev = false
 
 route = { pattern = "reflector.cloudflareapp.cc", custom_domain = true }
