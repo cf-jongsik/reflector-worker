@@ -1,6 +1,0 @@
-name = "reflector-worker"
-main = "src/index.ts"
-compatibility_date = "2025-03-10"
-workers_dev = false
-
-route = { pattern = "reflector.cloudflareapp.cc", custom_domain = true }
