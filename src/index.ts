@@ -2,6 +2,17 @@ import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
 
+app.post('/v1/traces', async (c) => {
+	const { R2 } = c.env;
+	const fileName = new Date().toISOString();
+	const result = await R2.put(`trace/${fileName}.log.gz`, c.req.raw.body);
+	if (result) {
+		return c.json({ success: true, etag: result?.etag, key: result?.key, size: result?.size }, { status: 200 });
+	} else {
+		return c.json({ success: false }, { status: 400 });
+	}
+});
+
 app.all('*', async (c) => {
 	const headers = c.req.header();
 	console.log(headers, null, 2);
