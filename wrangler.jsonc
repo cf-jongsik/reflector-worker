@@ -17,5 +17,12 @@
 			"binding": "R2",
 			"bucket_name": "logpush"
 		}
+	],
+	"vpc_services": [
+		{
+			"binding": "HTTPBIN",
+			"service_id": "019a57cc-e005-70d0-b738-46970d21cc55",
+			"remote": true
+		}
 	]
 }

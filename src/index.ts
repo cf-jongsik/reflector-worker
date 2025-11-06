@@ -2,6 +2,33 @@ import { Hono } from 'hono';
 
 const app = new Hono<{ Bindings: Env }>();
 
+app.get('/httpbin/:path?', async (c) => {
+	const { HTTPBIN } = c.env;
+	if (!HTTPBIN) {
+		return c.json(
+			{
+				error: {
+					message: 'VPC not available',
+					path: c.req.path,
+					method: c.req.method,
+				},
+				metadata: {
+					timestamp: new Date().toISOString(),
+				},
+			},
+			500
+		);
+	}
+	const path = c.req.param('path') ?? '';
+	const url = new URL(`http://127.0.0.1/${path}`);
+	console.debug({
+		mode: 'VPC',
+		service: 'HTTPBIN',
+		url,
+	});
+	return HTTPBIN.fetch(new Request(url), c.req.raw);
+});
+
 app.post('/v1/traces', async (c) => {
 	const { R2 } = c.env;
 	const fileName = new Date().toISOString();
