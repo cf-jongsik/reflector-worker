@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "reflector-worker",
 	"main": "src/index.ts",
-	"compatibility_date": "2026-03-10",
+	"compatibility_date": "2026-08-24",
 	"workers_dev": false,
 	"preview_urls": false,
 	"observability": {
@@ -15,7 +15,7 @@
 	"r2_buckets": [
 		{
 			"binding": "R2",
-			"bucket_name": "logpush",
+			"bucket_name": "demo",
 		},
 	],
 	"vpc_services": [
